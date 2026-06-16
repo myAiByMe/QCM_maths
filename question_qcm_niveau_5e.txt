@@ -1,0 +1,359 @@
+1. Quel est le résultat de 3 + 4 × 2 ?
+A) 9
+B) 14
+C) 11*
+D) 7
+
+2. Quel est le résultat de (5 + 3) × 4 – 6 ?
+A) 26*
+B) 14
+C) 32
+D) 18
+
+3. Parmi les expressions suivantes, laquelle est un produit ?
+A) 5 × (3 + 2)*
+B) 5 + 3 × 2
+C) (5 + 3) + 2
+D) 5 + (3 + 2)
+
+4. Quel est le résultat de 7 × (12 – 4) – 3 × 5 ?
+A) 41*
+B) 71
+C) 56
+D) 23
+
+5. Quel est l'opposé de −7 ?
+A) 12
+B) 0
+C) −7
+D) 7*
+
+6. Quel est le résultat de −3 + 8 ?
+A) −11
+B) 5*
+C) 11
+D) −5
+
+7. Quel est le résultat de 4 − (−6) ?
+A) −2
+B) 2
+C) −10
+D) 10*
+
+8. Quel est le résultat de −5 + 3 − (−2) + (−4) ?
+A) −4*
+B) 0
+C) 4
+D) −8
+
+9. Laquelle de ces fractions est égale à 2/3 ?
+A) 3/4
+B) 8/12*
+C) 5/6
+D) 4/9
+
+10. Quel est le résultat de 3/5 + 2/5 ?
+A) 5/25
+B) 6/10
+C) 1*
+D) 5/10
+
+11. Quel est le résultat de 1/4 + 1/3 ?
+A) 2/7
+B) 2/12
+C) 7/12*
+D) 3/7
+
+12. Laquelle de ces fractions est sous la forme la plus simplifiée ?
+A) 6/9
+B) 4/10
+C) 5/7*
+D) 8/12
+
+13. Quel est le résultat de 3² ?
+A) 6
+B) 9*
+C) 8
+D) 12
+
+14. Quel est le résultat de 2³ ?
+A) 6
+B) 5
+C) 8*
+D) 16
+
+15. Quel est le résultat de 4² + 3² ?
+A) 49
+B) 14
+C) 25*
+D) 20
+
+16. Quel est le résultat de 10³ ?
+A) 300
+B) 10 000
+C) 30
+D) 1 000*
+
+17. Quelle est la valeur de 3x + 5 pour x = 2 ?
+A) 16
+B) 10
+C) 13
+D) 11*
+
+18. Laquelle de ces expressions est une somme ?
+A) 3 × (x + 2)
+B) 5x
+C) 3x + 2*
+D) 4 × (x − 1)
+
+19. Quel est le résultat du développement de 4 × (x + 3) ?
+A) 4x + 3
+B) x + 12
+C) 4x + 12*
+D) 4x − 3
+
+20. Quelle équation correspond à : le double d'un nombre augmenté de 3 est égal à 11 ?
+A) x + 3 = 11
+B) 2 + 3x = 11
+C) x + 6 = 11
+D) 2x + 3 = 11*
+
+21. Un point a pour abscisse −2 sur une droite graduée. Où se situe-t-il par rapport à 0 ?
+A) À 2 unités à droite de 0
+B) À 2 unités à gauche de 0*
+C) À l'origine
+D) À 0,2 unité de 0
+
+22. Dans un repère orthogonal, le point A a pour coordonnées (3 ; −2). Quelle est son ordonnée ?
+A) 3
+B) 0
+C) 2
+D) −2*
+
+23. Dans un repère orthogonal, quel point est situé le plus haut ?
+A) B(1 ; −3)
+B) A(2 ; 4)*
+C) D(−1 ; 4)
+D) C(0 ; −1)
+
+24. Quel point appartient à l'axe des ordonnées ?
+A) P(3 ; 0)
+B) R(2 ; −2)
+C) Q(0 ; −5)*
+D) S(−3 ; 1)
+
+25. Quel solide a pour patron un rectangle qui se referme en tube avec deux disques ?
+A) Un cube
+B) Un prisme droit triangulaire
+C) Un cylindre de révolution*
+D) Un cône
+
+26. Quel est le volume d'un cube de côté 3 cm ?
+A) 9 cm³
+B) 18 cm³
+C) 6 cm³
+D) 27 cm³*
+
+27. Un pavé droit mesure 4 cm de longueur, 3 cm de largeur et 2 cm de hauteur. Quel est son volume ?
+A) 14 cm³
+B) 18 cm³
+C) 24 cm³*
+D) 9 cm³
+
+28. Quelle formule permet de calculer le volume d'un cylindre de révolution de rayon r et de hauteur h ?
+A) V = 2πr × h
+B) V = πr × h
+C) V = πr² + h
+D) V = πr² × h*
+
+29. Quel autre nom désigne la symétrie centrale ?
+A) Symétrie axiale
+B) Demi-tour*
+C) Rotation d'un quart de tour
+D) Translation
+
+30. Si le point A a pour coordonnées (2 ; 3) et que O est le centre du demi-tour, quelle est l'image de A ?
+A) (2 ; −3)
+B) (−2 ; −3)*
+C) (−2 ; 3)
+D) (3 ; 2)
+
+31. Par un demi-tour de centre O, l'image du segment [AB] est [A'B']. Quelle propriété est vérifiée ?
+A) [AB] et [A'B'] sont perpendiculaires
+B) [AB] et [A'B'] ont des longueurs différentes
+C) O est le milieu de [AA'] et de [BB']*
+D) A' est le symétrique de B par rapport à O
+
+32. Deux figures sont symétriques par rapport à un point O. Que peut-on dire de leurs aires ?
+A) L'aire de l'image est deux fois plus grande
+B) Elles n'ont aucun lien
+C) L'aire de l'image est deux fois plus petite
+D) Leurs aires sont égales*
+
+33. Comment appelle-t-on les angles situés de part et d'autre de la sécante, entre deux droites parallèles ?
+A) Angles supplémentaires
+B) Angles correspondants
+C) Angles adjacents
+D) Angles alternes-internes*
+
+34. Si deux droites parallèles sont coupées par une sécante, les angles alternes-internes sont :
+A) Complémentaires
+B) Supplémentaires
+C) Adjacents
+D) Égaux*
+
+35. Un angle alterne-interne mesure 47°. Quelle est la mesure de l'angle alterne-interne correspondant ?
+A) 137°
+B) 43°
+C) 90°
+D) 47°*
+
+36. Deux angles correspondants mesurent 65° et 65°. Que peut-on conclure ?
+A) Les deux droites sont perpendiculaires
+B) Les deux droites sont sécantes mais non parallèles
+C) On ne peut rien conclure
+D) Les deux droites sont parallèles*
+
+37. La somme des angles d'un triangle est égale à :
+A) 90°
+B) 360°
+C) 270°
+D) 180°*
+
+38. Un triangle a deux angles mesurant 55° et 70°. Quelle est la mesure du troisième angle ?
+A) 55°
+B) 125°
+C) 45°
+D) 55°*
+
+39. Un triangle a trois angles égaux. Quelle est la nature de ce triangle ?
+A) Rectangle
+B) Quelconque
+C) Équilatéral*
+D) Isocèle
+
+40. Un triangle a des angles mesurant 90°, 50° et 40°. Quelle est sa nature ?
+A) Isocèle
+B) Quelconque
+C) Équilatéral
+D) Rectangle*
+
+41. Quelle est la définition d'un parallélogramme ?
+A) Un quadrilatère ayant quatre côtés égaux
+B) Un quadrilatère ayant deux angles droits
+C) Un quadrilatère ayant deux diagonales perpendiculaires
+D) Un quadrilatère ayant ses côtés opposés parallèles deux à deux*
+
+42. Un quadrilatère ABCD est un parallélogramme, AB = 5 cm et BC = 3 cm. Quelle est la longueur de CD ?
+A) 3 cm*
+B) 4 cm
+C) 5 cm
+D) 8 cm
+
+43. Dans un parallélogramme, les diagonales :
+A) Sont perpendiculaires
+B) Ont la même longueur
+C) Se coupent en leurs milieux*
+D) Sont parallèles
+
+44. Quelle propriété est vraie pour un rectangle mais pas pour tous les parallélogrammes ?
+A) Ses côtés opposés sont parallèles
+B) Ses diagonales se coupent en leurs milieux
+C) Ses angles sont tous droits*
+D) Ses côtés opposés sont égaux
+
+45. On recueille les notes : 8 ; 12 ; 10 ; 14 ; 6. Quelle est la moyenne ?
+A) 9
+B) 11
+C) 12
+D) 10*
+
+46. 12 élèves sur 30 ont choisi le bleu. Quelle est la fréquence correspondante ?
+A) 50 %
+B) 40 %*
+C) 12 %
+D) 30 %
+
+47. L'effectif total est 25. Un groupe a un effectif de 10. Quelle est sa fréquence ?
+A) 25 %
+B) 50 %
+C) 40 %*
+D) 10 %
+
+48. Quelle représentation est la plus adaptée pour comparer des parts d'un tout ?
+A) Graphique cartésien
+B) Tableau de valeurs
+C) Diagramme en barres
+D) Diagramme circulaire*
+
+49. On lance un dé à six faces. Quel est le vocabulaire correct pour désigner chaque résultat possible ?
+A) Un événement
+B) Une probabilité
+C) Un effectif
+D) Une issue*
+
+50. On tire au sort une carte parmi 5 numérotées de 1 à 5. Quelle est la probabilité d'obtenir la carte numéro 3 ?
+A) 3/5
+B) 1/3
+C) 3
+D) 1/5*
+
+51. Un sac contient 3 billes rouges et 7 billes bleues. Obtenir une bille rouge est :
+A) Certain
+B) Impossible
+C) Très probable
+D) Improbable*
+
+52. Un sac contient 4 billes vertes et 4 billes jaunes. Obtenir une bille verte est :
+A) Impossible
+B) Certain
+C) Très probable
+D) Une chance sur deux*
+
+53. Un stylo coûte 2 €. Quel est le prix de 5 stylos ?
+A) 7 €
+B) 10 €*
+C) 12 €
+D) 8 €
+
+54. Un robinet remplit 3 litres en 4 minutes. Combien de litres remplit-il en 12 minutes ?
+A) 6 litres
+B) 9 litres*
+C) 15 litres
+D) 36 litres
+
+55. Dans une classe de 25 élèves, 40 % sont des filles. Combien y a-t-il de filles ?
+A) 15
+B) 20
+C) 8
+D) 10*
+
+56. Une carte a une échelle de 1/50 000. Sur la carte, deux villes sont distantes de 4 cm. Quelle est la distance réelle ?
+A) 200 m
+B) 20 km
+C) 2 km*
+D) 2 000 km
+
+57. Un robinet verse 3 litres par minute. Quelle formule exprime le volume V en fonction du temps t ?
+A) V = t + 3
+B) V = t ÷ 3
+C) V = 3 + t²
+D) V = 3 × t*
+
+58. On donne P = 4 × c. Pour c = 7, quelle est la valeur de P ?
+A) 11
+B) 28*
+C) 21
+D) 47
+
+59. Pour x = 2 ; y = 6 et pour x = 4 ; y = 12. Cette situation est-elle proportionnelle ?
+A) Non, car les valeurs ne sont pas entières
+B) Oui, car les valeurs augmentent
+C) Non, car le tableau n'a que deux colonnes
+D) Oui, car le rapport y/x est constant et égal à 3*
+
+60. Dans un repère, où se situe obligatoirement la droite d'une situation de proportionnalité ?
+A) Elle passe toujours par le point (1 ; 1)
+B) Elle est toujours horizontale
+C) Elle passe toujours par l'origine du repère*
+D) Elle est toujours verticale
