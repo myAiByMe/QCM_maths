@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maths QCM</title>
+  <style>
+    :root {
+      --couleur-fond:       #ffffff;
+      --couleur-texte:      #1a1a1a;
+      --couleur-accent:     #2563eb;
+      --couleur-secondaire: #f1f5f9;
+      --couleur-bordure:    #e2e8f0;
+      --largeur-max:        800px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--couleur-fond); color: var(--couleur-texte); line-height: 1.7; font-size: 1rem; }
+    .container { max-width: var(--largeur-max); margin: 0 auto; padding: 0 1.5rem; }
+    header { border-bottom: 1px solid var(--couleur-bordure); padding: 1.5rem 0; }
+    header .container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.4rem; font-weight: bold; }
+    .hero { background: var(--couleur-secondaire); padding: 4rem 0; text-align: center; }
+    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 2rem; font-weight: 700; }
+    .profiles { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+    .profile-card { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+    .profile-card:hover .avatar { transform: scale(1.08); box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+    .avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: bold; color: #fff; transition: transform 0.2s, box-shadow 0.2s; }
+    .avatar-label { font-size: 0.8rem; color: #475569; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .role-badge { font-size: 0.7rem; padding: 1px 8px; border-radius: 100px; font-weight: 600; }
+    .role-prof  { background: #dbeafe; color: #1d4ed8; }
+    .role-eleve { background: #dcfce7; color: #15803d; }
+    .btn-cercle { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--couleur-accent); color: #fff; font-size: 2rem; cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.25); transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; text-decoration: none; }
+    .btn-cercle:hover { opacity: 0.88; transform: scale(1.08); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.38); display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: #fff; border-radius: 16px; padding: 2rem 1.75rem; width: 340px; max-width: 92vw; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+    .modal h2 { font-size: 1.1rem; font-weight: 600; }
+    .avatar-preview { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+    .role-select { display: flex; gap: 0.75rem; width: 100%; }
+    .role-btn { flex: 1; padding: 0.6rem 0; border-radius: 8px; border: 1.5px solid var(--couleur-bordure); background: var(--couleur-secondaire); font-size: 0.9rem; cursor: pointer; font-weight: 500; color: var(--couleur-texte); transition: border-color 0.15s, background 0.15s; }
+    .role-btn.active-prof  { border-color: #2563eb; background: #dbeafe; color: #1d4ed8; }
+    .role-btn.active-eleve { border-color: #16a34a; background: #dcfce7; color: #15803d; }
+    .modal input[type="text"] { width: 100%; border: 1.5px solid var(--couleur-bordure); border-radius: 8px; padding: 0.6rem 1rem; font-size: 1rem; outline: none; text-align: center; color: var(--couleur-texte); transition: border-color 0.15s; }
+    .modal input[type="text"]:focus { border-color: var(--couleur-accent); }
+    .modal-actions { display: flex; gap: 0.75rem; width: 100%; }
+    .modal-actions button { flex: 1; padding: 0.65rem; border-radius: 8px; font-size: 0.95rem; cursor: pointer; border: 1.5px solid var(--couleur-bordure); background: var(--couleur-secondaire); color: var(--couleur-texte); transition: background 0.15s; }
+    .modal-actions button:hover { background: #e2e8f0; }
+    .modal-actions .btn-valider { background: var(--couleur-accent); color: #fff; border-color: transparent; }
+    .modal-actions .btn-valider:hover { opacity: 0.88; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container"><span class="logo">Maths QCM</span></div>
+  </header>
+  <div class="hero">
+    <div class="container">
+      <h1>S'ajouter en tant que prof ou élève</h1>
+      <div class="profiles" id="profiles"></div>
+      <a class="btn-cercle" onclick="ouvrirModal()" title="Ajouter un profil">+</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="overlay" onclick="fermerSiDehors(event)">
+    <div class="modal">
+      <h2>Nouveau profil</h2>
+      <div class="avatar-preview" id="apercu">?</div>
+      <div class="role-select">
+        <button class="role-btn" id="btnProf"  onclick="choisirRole('prof')">Professeur</button>
+        <button class="role-btn" id="btnEleve" onclick="choisirRole('eleve')">Élève</button>
+      </div>
+      <input type="text" id="champNom" placeholder="Votre prénom ou pseudo" maxlength="20" oninput="mettreAJourApercu()" />
+      <div class="modal-actions">
+        <button onclick="fermerModal()">Annuler</button>
+        <button class="btn-valider" onclick="confirmer()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const COULEURS_PROF  = ['#2563eb','#7c3aed','#0891b2'];
+    const COULEURS_ELEVE = ['#16a34a','#d97706','#dc2626'];
+    let profiles = JSON.parse(localStorage.getItem('qcm_profiles') || '[]');
+    let roleChoisi = null, couleurIdx = 0;
+
+    function initiales(n){ return n.trim().slice(0,2).toUpperCase()||'?'; }
+
+    function sauver(){ localStorage.setItem('qcm_profiles', JSON.stringify(profiles)); }
+
+    function rendreProfils(){
+      const el = document.getElementById('profiles');
+      el.innerHTML = '';
+      profiles.forEach((p,i) => {
+        el.innerHTML += `
+          <div class="profile-card" onclick="selectionner(${i})">
+            <div class="avatar" style="background:${p.couleur}">${initiales(p.nom)}</div>
+            <span class="avatar-label">${p.nom}</span>
+            <span class="role-badge role-${p.role}">${p.role==='prof'?'Professeur':'Élève'}</span>
+          </div>`;
+      });
+    }
+
+    function selectionner(i){
+      const p = profiles[i];
+      localStorage.setItem('qcm_user', JSON.stringify(p));
+      if(p.role === 'prof') window.location.href = 'qcm.html';
+    }
+
+    function ouvrirModal(){
+      roleChoisi = null; couleurIdx = 0;
+      document.getElementById('champNom').value = '';
+      document.getElementById('btnProf').className  = 'role-btn';
+      document.getElementById('btnEleve').className = 'role-btn';
+      mettreAJourApercu();
+      document.getElementById('overlay').classList.add('open');
+      setTimeout(()=>document.getElementById('champNom').focus(),120);
+    }
+    function fermerModal(){ document.getElementById('overlay').classList.remove('open'); }
+    function fermerSiDehors(e){ if(e.target===document.getElementById('overlay')) fermerModal(); }
+
+    function choisirRole(role){
+      roleChoisi = role;
+      document.getElementById('btnProf').className  = 'role-btn'+(role==='prof' ?' active-prof':'');
+      document.getElementById('btnEleve').className = 'role-btn'+(role==='eleve'?' active-eleve':'');
+      couleurIdx = profiles.filter(p=>p.role===role).length % (role==='prof'?COULEURS_PROF.length:COULEURS_ELEVE.length);
+      mettreAJourApercu();
+    }
+
+    function mettreAJourApercu(){
+      const nom = document.getElementById('champNom').value;
+      const apercu = document.getElementById('apercu');
+      apercu.textContent = initiales(nom)||'?';
+      const couleurs = roleChoisi==='eleve'?COULEURS_ELEVE:COULEURS_PROF;
+      apercu.style.background = couleurs[couleurIdx%couleurs.length];
+    }
+
+    function confirmer(){
+      const nom = document.getElementById('champNom').value.trim();
+      if(!nom){ document.getElementById('champNom').focus(); return; }
+      if(!roleChoisi){ alert('Choisissez un rôle.'); return; }
+      const couleurs = roleChoisi==='eleve'?COULEURS_ELEVE:COULEURS_PROF;
+      profiles.push({nom, role:roleChoisi, couleur:couleurs[couleurIdx%couleurs.length]});
+      sauver(); fermerModal(); rendreProfils();
+    }
+
+    document.addEventListener('keydown', e=>{
+      if(e.key==='Escape') fermerModal();
+      if(e.key==='Enter' && document.getElementById('overlay').classList.contains('open')) confirmer();
+    });
+    rendreProfils();
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"642255d447fd46dbbcd67f3ff9dbdf59","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

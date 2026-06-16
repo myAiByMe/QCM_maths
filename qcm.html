@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maths QCM – Créer un QCM</title>
+  <style>
+    :root {
+      --accent:   #2563eb;
+      --fond:     #f1f5f9;
+      --bordure:  #e2e8f0;
+      --texte:    #1a1a1a;
+      --rouge:    #dc2626;
+      --vert:     #16a34a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--fond); color: var(--texte); min-height: 100vh; }
+
+    header { background: #fff; border-bottom: 1px solid var(--bordure); padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .logo { font-size: 1.2rem; font-weight: 700; }
+    .user-pill { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #475569; }
+    .mini-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #fff; }
+    .btn-back { font-size: 0.85rem; color: var(--accent); cursor: pointer; border: none; background: none; text-decoration: underline; }
+
+    .page { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .card { background: #fff; border: 1px solid var(--bordure); border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .paste-area { width: 100%; min-height: 140px; border: 1.5px dashed var(--bordure); border-radius: 8px; padding: 0.9rem 1rem; font-size: 0.9rem; color: var(--texte); resize: vertical; outline: none; font-family: inherit; line-height: 1.6; transition: border-color 0.15s; }
+    .paste-area:focus { border-color: var(--accent); }
+    .hint { font-size: 0.78rem; color: #64748b; margin-top: 0.5rem; }
+    .btn-parse { margin-top: 0.9rem; padding: 0.6rem 1.4rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; transition: opacity 0.15s; }
+    .btn-parse:hover { opacity: 0.85; }
+
+    .questions-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .q-card { background: #fff; border: 1px solid var(--bordure); border-radius: 12px; padding: 1.1rem 1.25rem; position: relative; }
+    .q-num { font-size: 0.72rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 600; margin-bottom: 0.9rem; }
+    .q-text[contenteditable] { outline: none; border-bottom: 1.5px dashed var(--bordure); padding-bottom: 4px; cursor: text; }
+    .q-text[contenteditable]:focus { border-bottom-color: var(--accent); }
+
+    .answers-grid { display: grid; gap: 0.5rem; }
+    .answers-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .answers-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .answers-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+
+    .ans-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1.5px solid var(--bordure); background: #f8fafc; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .ans-item.correct { border-color: var(--vert); background: #f0fdf4; }
+    .ans-item .ans-letter { width: 24px; height: 24px; border-radius: 50%; background: var(--bordure); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #475569; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
+    .ans-item.correct .ans-letter { background: var(--vert); color: #fff; }
+    .ans-text { font-size: 0.88rem; flex: 1; outline: none; background: transparent; border: none; color: var(--texte); cursor: pointer; }
+    .ans-text:focus { cursor: text; }
+
+    .q-actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .q-actions button { font-size: 0.78rem; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--bordure); background: #f1f5f9; cursor: pointer; color: var(--texte); }
+    .q-actions button:hover { background: #e2e8f0; }
+    .q-actions .del-q { color: var(--rouge); border-color: #fecaca; background: #fff1f2; }
+    .q-actions .del-q:hover { background: #fee2e2; }
+
+    .toolbar { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .toolbar button { padding: 0.6rem 1.2rem; border-radius: 8px; border: 1.5px solid var(--bordure); background: #fff; font-size: 0.88rem; cursor: pointer; color: var(--texte); transition: background 0.15s; }
+    .toolbar button:hover { background: #e2e8f0; }
+    .btn-launch { background: var(--accent) !important; color: #fff !important; border-color: transparent !important; }
+    .btn-launch:hover { opacity: 0.85; }
+
+    .session-panel { background: #fff; border: 1px solid var(--bordure); border-radius: 12px; padding: 1.5rem; display: none; }
+    .session-panel.open { display: block; }
+    .session-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+    .session-header h2 { font-size: 1rem; font-weight: 600; }
+    .live-badge { background: #fef2f2; color: var(--rouge); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; border: 1px solid #fecaca; }
+    .big-question { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding: 1rem; background: var(--fond); border-radius: 8px; }
+    .display-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+    .display-ans { padding: 0.75rem 1rem; border-radius: 8px; border: 1.5px solid var(--bordure); font-size: 0.9rem; background: #f8fafc; display: flex; gap: 10px; align-items: center; }
+    .display-ans .dl { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-btns { display: flex; gap: 0.75rem; }
+    .nav-btns button { flex: 1; padding: 0.65rem; border-radius: 8px; border: 1.5px solid var(--bordure); background: var(--fond); cursor: pointer; font-size: 0.9rem; }
+    .nav-btns .btn-next { background: var(--accent); color: #fff; border-color: transparent; }
+    .q-counter { font-size: 0.82rem; color: #64748b; text-align: center; margin-top: 0.5rem; }
+
+    .empty-state { text-align: center; color: #94a3b8; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">Maths QCM</span>
+  <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+    <div class="user-pill">
+      <div class="mini-avatar" id="miniAvatar"></div>
+      <span id="userName"></span>
+      <span style="background:#dbeafe;color:#1d4ed8;font-size:0.7rem;padding:1px 8px;border-radius:100px;font-weight:600;">Professeur</span>
+    </div>
+    <button class="btn-back" onclick="window.location.href='maths_qcm.html'">Changer de profil</button>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- Zone coller QCM -->
+  <div class="card" id="importCard">
+    <h2>Coller votre QCM</h2>
+    <textarea class="paste-area" id="pasteArea" placeholder="Collez votre QCM ici. Exemple :
+
+1. Combien font 3 x 4 ?
+A) 9
+B) 12*
+C) 14
+D) 16
+
+2. Racine carree de 49 ?
+A) 6
+B) 7*
+C) 8
+
+Marquez la bonne reponse avec une etoile : B*)"></textarea>
+    <p class="hint">Format accepté : numéro + question, puis A) B) C) D) pour les réponses. Marquez la bonne réponse avec une étoile (*) ex : <strong>B*)</strong> ou <strong>B) ma réponse *</strong>.</p>
+    <button class="btn-parse" onclick="parserQCM()">Importer les questions</button>
+  </div>
+
+  <div class="toolbar" id="toolbar" style="display:none;">
+    <button onclick="ajouterQuestion()">+ Ajouter une question</button>
+    <button onclick="toutEffacer()" style="color:var(--rouge);border-color:#fecaca;">Tout effacer</button>
+    <button class="btn-launch" onclick="lancerSession()">Lancer la session</button>
+  </div>
+
+  <div class="questions-list" id="questionsList"></div>
+
+  <div class="session-panel" id="sessionPanel">
+    <div class="session-header">
+      <h2>Session en direct</h2>
+      <span class="live-badge">EN DIRECT</span>
+      <button onclick="arreterSession()" style="font-size:0.82rem;padding:4px 12px;border-radius:6px;border:1px solid var(--bordure);background:#fff1f2;color:var(--rouge);cursor:pointer;">Arrêter</button>
+    </div>
+    <div class="big-question" id="sessionQ"></div>
+    <div class="display-answers" id="sessionA"></div>
+    <div class="nav-btns">
+      <button onclick="navSession(-1)">Précédent</button>
+      <button class="btn-next" onclick="navSession(1)">Suivant</button>
+    </div>
+    <div class="q-counter" id="sessionCounter"></div>
+  </div>
+
+</div>
+
+<script>
+  const user = JSON.parse(localStorage.getItem('qcm_user') || '{"nom":"Prof","couleur":"#2563eb"}');
+  document.getElementById('userName').textContent = user.nom;
+  const av = document.getElementById('miniAvatar');
+  av.style.background = user.couleur;
+  av.textContent = user.nom.slice(0,2).toUpperCase();
+
+  let questions = [];
+  let sessionIdx = 0;
+
+  function retirerEmojis(s) {
+    return s.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FEFF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA00}-\u{1FA9F}]/gu, '').trim();
+  }
+  function retirerPrefixeQuestion(s) {
+    return s.replace(/^[\d]+[\.\)]\s*/, '').replace(/^[Qq][\.\d]+[\.\)]\s*/, '').trim();
+  }
+  function retirerPrefixeReponse(s) {
+    return s.replace(/^[A-Da-d][\.\)]\*?\s*/, '').replace(/\*/g, '').trim();
+  }
+
+  function parserQCM() {
+    const raw = document.getElementById('pasteArea').value.trim();
+    if (!raw) return;
+
+    const blocs = raw.split(/\n(?=\d+[\.\)]\s)/);
+    const parsed = [];
+
+    blocs.forEach(bloc => {
+      const lignes = bloc.split('\n').map(l => l.trim()).filter(Boolean);
+      if (!lignes.length) return;
+
+      const qText = retirerEmojis(retirerPrefixeQuestion(lignes[0]));
+      const reponses = [];
+      let bonne = null;
+
+      for (let i = 1; i < lignes.length; i++) {
+        const l = lignes[i];
+        const m = l.match(/^([A-Da-d])[\.\)]\*?\s*(.*?)\*?\s*$/);
+        if (!m) continue;
+        const lettre = m[1].toUpperCase();
+        const texte  = retirerEmojis(retirerPrefixeReponse(m[2]));
+        const estBonne = l.includes('*');
+        reponses.push({ lettre, texte });
+        if (estBonne) bonne = lettre;
+      }
+
+      if (qText && reponses.length >= 2) {
+        parsed.push({ question: qText, reponses, bonne });
+      }
+    });
+
+    if (!parsed.length) {
+      alert('Aucune question reconnue. Vérifiez le format : chaque question doit commencer par un numéro (1. ou 1)) et les réponses par A) B) C) D).');
+      return;
+    }
+    questions = parsed;
+    document.getElementById('pasteArea').value = '';
+    document.getElementById('importCard').style.display = 'none';
+    rendreListe();
+    document.getElementById('toolbar').style.display = 'flex';
+  }
+
+  function rendreListe() {
+    const el = document.getElementById('questionsList');
+    if (!questions.length) { el.innerHTML = '<div class="empty-state">Aucune question. Collez un QCM ci-dessus ou ajoutez manuellement.</div>'; return; }
+    el.innerHTML = '';
+    questions.forEach((q, qi) => {
+      const nb = q.reponses.length;
+      const colClass = nb === 2 ? 'cols-2' : nb === 3 ? 'cols-3' : 'cols-4';
+      const div = document.createElement('div');
+      div.className = 'q-card';
+      div.innerHTML = `
+        <div class="q-num">Question ${qi+1}</div>
+        <div class="q-text" contenteditable="true" onblur="questions[${qi}].question=this.textContent.trim()">${escHtml(q.question)}</div>
+        <div class="answers-grid ${colClass}" id="grid-${qi}">
+          ${q.reponses.map((r,ri) => `
+            <div class="ans-item${q.bonne===r.lettre?' correct':''}" id="ans-${qi}-${ri}" onclick="toggleCorrect(${qi},${ri})">
+              <div class="ans-letter">${r.lettre}</div>
+              <span class="ans-text" contenteditable="true"
+                onclick="event.stopPropagation()"
+                onblur="questions[${qi}].reponses[${ri}].texte=this.textContent.trim()"
+              >${escHtml(r.texte)}</span>
+            </div>`).join('')}
+        </div>
+        <div class="q-actions">
+          <button onclick="ajouterReponse(${qi})" ${q.reponses.length>=4?'disabled style="opacity:.4;cursor:not-allowed"':''}>+ Réponse</button>
+          <button onclick="supprimerReponse(${qi})" ${q.reponses.length<=2?'disabled style="opacity:.4;cursor:not-allowed"':''}>− Réponse</button>
+          <button class="del-q" onclick="supprimerQuestion(${qi})">Supprimer</button>
+        </div>`;
+      el.appendChild(div);
+    });
+  }
+
+  function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function toggleCorrect(qi, ri) {
+    const lettre = questions[qi].reponses[ri].lettre;
+    questions[qi].bonne = questions[qi].bonne === lettre ? null : lettre;
+    rendreListe();
+  }
+
+  function supprimerQuestion(qi){ questions.splice(qi,1); rendreListe(); }
+
+  function ajouterQuestion(){
+    questions.push({ question: 'Nouvelle question', reponses:[{lettre:'A',texte:'Réponse A'},{lettre:'B',texte:'Réponse B'}], bonne: null });
+    rendreListe();
+    document.getElementById('toolbar').style.display = 'flex';
+    document.getElementById('importCard').style.display = 'none';
+  }
+
+  function ajouterReponse(qi){
+    const lettres = ['A','B','C','D'];
+    const q = questions[qi];
+    if(q.reponses.length >= 4) return;
+    q.reponses.push({lettre: lettres[q.reponses.length], texte: 'Réponse '+lettres[q.reponses.length]});
+    rendreListe();
+  }
+
+  function supprimerReponse(qi){
+    const q = questions[qi];
+    if(q.reponses.length <= 2) return;
+    const removed = q.reponses.pop();
+    if(q.bonne === removed.lettre) q.bonne = null;
+    rendreListe();
+  }
+
+  function toutEffacer(){
+    if(!confirm('Effacer toutes les questions ?')) return;
+    questions = [];
+    document.getElementById('importCard').style.display = 'block';
+    document.getElementById('toolbar').style.display = 'none';
+    rendreListe();
+  }
+
+  function lancerSession(){
+    if(!questions.length){ alert('Ajoutez au moins une question.'); return; }
+    sessionIdx = 0;
+    document.getElementById('sessionPanel').classList.add('open');
+    document.getElementById('sessionPanel').scrollIntoView({behavior:'smooth'});
+    afficherSessionQ();
+  }
+
+  function afficherSessionQ(){
+    const q = questions[sessionIdx];
+    document.getElementById('sessionQ').textContent = q.question;
+    const COLORS = ['#2563eb','#16a34a','#d97706','#dc2626'];
+    document.getElementById('sessionA').innerHTML = q.reponses.map((r,i)=>`
+      <div class="display-ans">
+        <div class="dl" style="background:${COLORS[i]}">${r.lettre}</div>
+        <span>${r.texte}</span>
+      </div>`).join('');
+    document.getElementById('sessionCounter').textContent = `Question ${sessionIdx+1} / ${questions.length}`;
+  }
+
+  function navSession(dir){
+    sessionIdx = Math.max(0, Math.min(questions.length-1, sessionIdx+dir));
+    afficherSessionQ();
+  }
+
+  function arreterSession(){
+    document.getElementById('sessionPanel').classList.remove('open');
+  }
+
+  rendreListe();
+  if(questions.length) document.getElementById('toolbar').style.display = 'flex';
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"642255d447fd46dbbcd67f3ff9dbdf59","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
