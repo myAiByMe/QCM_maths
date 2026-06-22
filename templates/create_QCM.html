@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un QCM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; min-height: 100vh; }
+
+        body {
+            background: #F8F9FE;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .return-btn {
+            margin-top: 25px;
+            margin-left: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4F46E5;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .return-btn:hover { text-decoration: underline; }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            padding: 20px 30px 30px;
+            flex: 1;
+            align-items: flex-start;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .panel-left {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 100px);
+            overflow: hidden;
+        }
+        .panel-right { flex: 0.9; display: flex; flex-direction: column; position: sticky; top: 20px; }
+
+        #edition-section {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        #questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow-y: auto;
+            max-height: calc(100vh - 320px);
+            padding-right: 6px;
+        }
+
+        /* ── IMPORT SECTION ── */
+        #import-section { }
+
+        .import-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .icon-circle {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: #4F46E5;
+            color: white;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .import-header h3 { color: #4F46E5; font-size: 15px; margin-bottom: 4px; }
+        .import-header p  { color: #9CA3AF; font-size: 13px; }
+
+        textarea {
+            width: 100%; height: 110px;
+            border: 2px dashed #A5B4FC; border-radius: 10px;
+            padding: 14px; resize: none; outline: none;
+            font-family: inherit; font-size: 13px; color: #374151;
+        }
+        textarea::placeholder { color: #C4B5FD; }
+
+        .example-text { margin-top: 8px; color: #9CA3AF; font-size: 12px; }
+
+        .analyze-btn {
+            float: right; margin-top: 14px;
+            padding: 10px 20px; border: none; border-radius: 8px;
+            background: #4F46E5; color: white;
+            cursor: pointer; font-weight: 600; font-size: 14px;
+            font-family: inherit;
+        }
+        .analyze-btn:hover { background: #4338CA; }
+
+        .edition-title {
+            color: #4F46E5; font-size: 14px; font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        /* Question card */
+        .question-card {
+            border: 1px solid #E5E7EB; border-radius: 10px;
+            padding: 16px 16px 14px; margin-bottom: 14px;
+            background: white;
+        }
+
+        .question-top {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 14px;
+        }
+        .drag-handle {
+            color: #D1D5DB; cursor: grab; font-size: 18px;
+            display: flex; align-items: center;
+        }
+        .drag-handle:active { cursor: grabbing; }
+
+        .q-badge {
+            background: #4F46E5; color: white;
+            font-size: 12px; font-weight: 700;
+            padding: 4px 10px; border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .q-title-input {
+            flex: 1; border: none; outline: none;
+            font-size: 14px; font-weight: 500; color: #374151;
+            font-family: inherit; background: transparent;
+        }
+
+        .q-actions { display: flex; gap: 8px; margin-left: auto; }
+        .q-actions button {
+            background: none; border: none; cursor: pointer;
+            padding: 4px; border-radius: 6px;
+            font-size: 18px; color: #9CA3AF;
+            display: flex; align-items: center;
+        }
+        .q-actions button:hover { background: #F3F4F6; }
+        .q-actions .btn-delete:hover { color: #EF4444; background: #FEF2F2; }
+        .q-actions .btn-copy:hover  { color: #4F46E5; background: #EEF2FF; }
+
+        /* Answers grid */
+        .answers-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-bottom: 12px;
+        }
+
+        .answer-item {
+            display: flex; align-items: center; gap: 8px;
+            border: 1.5px solid #E5E7EB; border-radius: 8px;
+            padding: 8px 12px;
+            transition: border-color .15s, background .15s;
+        }
+        .answer-item.correct {
+            border-color: #22C55E; background: #F0FDF4;
+        }
+
+        .question-card {
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+        .question-card:hover {
+            box-shadow: 0 20px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .answer-letter {
+            width: 26px; height: 26px;
+            border: 1.5px solid #D1D5DB; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 600; color: #6B7280;
+            flex-shrink: 0;
+        }
+        .answer-item.correct .answer-letter {
+            border-color: #22C55E; color: #22C55E;
+        }
+
+        .answer-input {
+            flex: 1; border: none; outline: none;
+            font-size: 13px; color: #374151;
+            font-family: inherit; background: transparent;
+        }
+
+        .answer-radio {
+            width: 18px; height: 18px;
+            border: 1.5px solid #D1D5DB; border-radius: 50%;
+            cursor: pointer; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            margin-left: auto;
+        }
+        .answer-item.correct .answer-radio {
+            border-color: #22C55E; background: #22C55E;
+            position: relative;
+        }
+        .answer-item.correct .answer-radio::after {
+            content: '';
+            width: 8px; height: 8px;
+            background: white; border-radius: 50%;
+        }
+
+        .question-footer {
+            display: flex; align-items: center; gap: 12px;
+            padding-top: 10px; border-top: 1px solid #F3F4F6;
+        }
+
+        .btn-add-answer {
+            display: flex; align-items: center; gap: 6px;
+            background: none; border: none; cursor: pointer;
+            font-size: 13px; color: #6B7280; font-family: inherit;
+            padding: 4px 0;
+        }
+        .btn-add-answer:hover { color: #4F46E5; }
+
+        .btn-correct-label {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 13px; color: #22C55E; font-weight: 500;
+            background: none; border: none; cursor: default;
+            font-family: inherit;
+        }
+
+        /* Add question */
+        .btn-add-question {
+            display: flex; align-items: center; gap: 8px;
+            margin: 8px auto 0;
+            padding: 10px 22px;
+            border: 1.5px solid #D1D5DB; border-radius: 8px;
+            background: white; font-size: 14px; color: #374151;
+            cursor: pointer; font-family: inherit;
+        }
+        .btn-add-question:hover { background: #F9FAFB; border-color: #4F46E5; color: #4F46E5; }
+
+        /* ── RIGHT PANEL ── */
+        .preview-title { color: #4F46E5; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .preview-sub   { color: #9CA3AF; font-size: 13px; margin-bottom: 16px; }
+
+        .preview-box {
+            flex: 1; min-height: 200px;
+            background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 10px;
+            padding: 16px; overflow-y: auto;
+        }
+        .preview-empty {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 12px;
+            padding: 40px 0;
+        }
+        .preview-icon {
+            width: 56px; height: 56px; background: #EEF2FF; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: #818CF8;
+        }
+        .preview-empty h4 { font-size: 14px; font-weight: 600; color: #374151; }
+        .preview-empty p  { font-size: 12px; color: #9CA3AF; text-align: center; max-width: 180px; line-height: 1.5; }
+
+        /* Preview question */
+        .preview-question { margin-bottom: 20px; }
+        .preview-q-num   { color: #4F46E5; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+        .preview-q-text  { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 10px; }
+
+        .preview-answer {
+            display: flex; align-items: center; gap: 10px;
+            border: 1.5px solid #E5E7EB; border-radius: 8px;
+            padding: 9px 12px; margin-bottom: 6px;
+            font-size: 13px; color: #374151; background: white;
+        }
+        .preview-answer.correct { border-color: #22C55E; background: #F0FDF4; }
+        .preview-answer.wrong { border-color: #EF4444; background: #FEE2E2; }
+        .preview-answer .p-letter {
+            width: 26px; height: 26px;
+            border: 1.5px solid #D1D5DB; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 600; color: #6B7280; flex-shrink: 0;
+        }
+        .preview-answer.correct .p-letter { border-color: #22C55E; color: #22C55E; }
+        .preview-answer.wrong .p-letter { border-color: #EF4444; color: #EF4444; }
+        .preview-answer .p-radio {
+            width: 18px; height: 18px;
+            border: 1.5px solid #D1D5DB; border-radius: 50%;
+            margin-left: auto; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .preview-answer.correct .p-radio {
+            border-color: #22C55E; background: #22C55E;
+        }
+        .preview-answer.wrong .p-radio {
+            border-color: #EF4444; background: #EF4444;
+        }
+        .preview-answer.correct .p-radio::after {
+            content: ''; width: 8px; height: 8px;
+            background: white; border-radius: 50%;
+        }
+
+        .info-banner {
+            background: #EEF2FF; border-radius: 10px;
+            padding: 14px 16px; margin-top: 16px;
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 13px; color: #4338CA; line-height: 1.5;
+        }
+        .info-banner i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+        .save-btn {
+            width: 100%; margin-top: 14px; padding: 14px;
+            border: none; border-radius: 10px;
+            background: #4F46E5; color: white;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; font-family: inherit;
+        }
+        .save-btn:hover { background: #4338CA; }
+        .save-btn:disabled { background: #A5B4FC; cursor: not-allowed; }
+
+        .save-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .save-modal.open { display: flex; }
+        .save-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(1px);
+        }
+        .save-modal-content {
+            position: relative;
+            width: min(520px, calc(100% - 40px));
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+            z-index: 1;
+        }
+        .save-modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .save-modal-header h3 {
+            margin: 0; font-size: 18px; color: #111827;
+        }
+        .modal-close {
+            border: none; background: transparent; font-size: 20px;
+            cursor: pointer; color: #6B7280;
+        }
+        .save-modal-body {
+            display: grid; gap: 14px;
+        }
+        .save-modal-body label {
+            display: flex; flex-direction: column;
+            font-size: 13px; color: #475569;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .save-modal-body input,
+        .save-modal-body select {
+            width: 100%; padding: 12px 14px;
+            border: 1px solid #CBD5E1; border-radius: 10px;
+            font-size: 14px; color: #111827;
+            background: #F8FAFC;
+            outline: none;
+        }
+        .save-modal-body input:focus,
+        .save-modal-body select:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+        }
+        .save-modal-actions {
+            margin-top: 18px;
+            display: flex; justify-content: flex-end; gap: 10px;
+        }
+        .btn-secondary {
+            padding: 12px 18px;
+            border: 1px solid #CBD5E1;
+            background: white;
+            border-radius: 10px;
+            color: #475569;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-secondary:hover { background: #F8FAFC; }
+
+        .preview-controls {
+            display: flex; justify-content: flex-end; margin-top: 10px; gap: 10px;
+        }
+        .preview-controls button {
+            padding: 10px 18px; border: none; border-radius: 10px;
+            background: #4F46E5; color: white; cursor: pointer;
+            font-size: 14px; font-weight: 600; font-family: inherit;
+        }
+        .preview-controls button:hover { background: #4338CA; }
+
+        .preview-feedback {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .correct-feedback { background: #ECFDF5; color: #166534; border: 1px solid #D1FAE5; }
+        .wrong-feedback { background: #FEF3F2; color: #B91C1C; border: 1px solid #FECACA; }
+
+        .save-note {
+            text-align: center; font-size: 12px; color: #9CA3AF;
+            margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+
+        .toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #22C55E; color: white;
+            padding: 12px 20px; border-radius: 10px;
+            font-size: 14px; font-weight: 500;
+            display: none; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+            z-index: 999;
+        }
+        .toast.show { display: flex; }
+    </style>
+</head>
+<body>
+
+    <a href="prof_dashboard.html" class="return-btn">
+        <i class="ti ti-chevron-left"></i> Retour au tableau de bord
+    </a>
+
+    <div class="content">
+
+        <!-- LEFT -->
+        <div class="panel panel-left">
+
+            <!-- Import (se cache après import) -->
+            <div id="import-section">
+                <div class="import-header">
+                    <div class="icon-circle"><i class="ti ti-file-text"></i></div>
+                    <div>
+                        <h3>Importer des questions</h3>
+                        <p>Collez ici vos questions et réponses.</p>
+                    </div>
+                </div>
+                <textarea id="qcm-input" placeholder="1. Combien font 3 x 4 ?&#10;A) 9&#10;B) 12*&#10;C) 14&#10;D) 16"></textarea>
+                <p class="example-text">Utilisez * pour indiquer la bonne réponse</p>
+                <button class="analyze-btn" onclick="importQCM()">Importer</button>
+            </div>
+
+            <!-- Edition (apparaît après import) -->
+            <div id="edition-section">
+                <div class="edition-title">Édition des questions</div>
+                <div id="questions-list"></div>
+                <button class="btn-add-question" onclick="addQuestion()">
+                    <i class="ti ti-plus"></i> Ajouter une question
+                </button>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="panel panel-right">
+            <div class="preview-title">Aperçu du QCM</div>
+            <div class="preview-sub">Voici à quoi ressemblera votre QCM pour les élèves.</div>
+
+            <div class="preview-box" id="preview-box">
+                <div class="preview-empty">
+                    <div class="preview-icon"><i class="ti ti-book"></i></div>
+                    <h4>Aucun QCM à afficher</h4>
+                    <p>Les questions de votre QCM apparaîtront ici après l'import.</p>
+                </div>
+            </div>
+
+            <div class="preview-controls">
+                <button id="prev-question-btn" onclick="prevQuestion()" disabled>Retour</button>
+                <button id="next-question-btn" onclick="nextQuestion()" disabled>Suivant</button>
+            </div>
+
+            <div class="info-banner">
+                <i class="ti ti-info-circle"></i>
+                <span>Une fois vos questions importées, vous pourrez les modifier et enregistrer votre QCM.</span>
+            </div>
+
+            <button class="save-btn" id="save-btn" onclick="openSaveModal()">
+                <i class="ti ti-device-floppy" style="font-size:18px;"></i>
+                Sauvegarder le QCM
+            </button>
+
+            <div class="save-note">
+                <i class="ti ti-lock" style="font-size:13px;"></i>
+                Votre QCM sera enregistré et disponible depuis le tableau de bord.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="save-modal" id="save-modal">
+        <div class="save-modal-backdrop" onclick="closeSaveModal()"></div>
+        <div class="save-modal-content">
+            <div class="save-modal-header">
+                <h3>Enregistrer le QCM</h3>
+                <button class="modal-close" type="button" onclick="closeSaveModal()">×</button>
+            </div>
+            <div class="save-modal-body">
+                <label>
+                    Nom du QCM
+                    <input id="save-qcm-name" type="text" placeholder="Ex : Quiz Multiplications 2024" />
+                </label>
+                <label>
+                    Nom de l'auteur
+                    <input id="save-author" type="text" placeholder="Ex : Mme Dupont" />
+                </label>
+                <label>
+                    Thème
+                    <input id="save-theme" type="text" placeholder="Ex : Multiplications" />
+                </label>
+                <label>
+                    Visibilité
+                    <select id="save-visibility">
+                        <option value="public">Public</option>
+                        <option value="private">Privé</option>
+                    </select>
+                </label>
+                <label>
+                    Niveau
+                    <select id="save-level">
+                        <option value="6éme">6éme</option>
+                        <option value="5ème">5ème</option>
+                        <option value="4ème">4ème</option>
+                        <option value="3ème">3ème</option>
+                        <option value="2nde">2nde</option>
+                    </select>
+                </label>
+            </div>
+            <div class="save-modal-actions">
+                <button class="btn-secondary" type="button" onclick="closeSaveModal()">Annuler</button>
+                <button class="save-btn" type="button" onclick="confirmSave()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="ti ti-check"></i> QCM sauvegardé avec succès !
+    </div>
+
+<script>
+    // ── State ──────────────────────────────────────────
+    let questions = [];   // [{ id, text, answers: [{letter, text, correct}] }]
+    let currentPreviewIndex = 0;
+    let userAnswers = []; // selected answer index for each question or null
+    let nextQuestionId = 1;
+    const LETTERS = ['A','B','C','D','E','F'];
+    let qcmMetadata = null;  // Métadonnées du QCM chargé (auteur, thème, niveau, visibilité)
+
+    function createQuestion(text, answers) {
+        return { id: nextQuestionId++, text, answers };
+    }
+
+    // ── Charger un QCM existant depuis le fichier ──────
+    async function loadQCMFromFile() {
+        const params = new URLSearchParams(window.location.search);
+        const filePath = params.get('file');
+        
+        if (!filePath) return; // Pas de fichier à charger, mode création
+        
+        try {
+            const response = await fetch(`/api/qcm/read/${encodeURIComponent(filePath)}`);
+            if (!response.ok) {
+                console.error('Erreur lors du chargement du QCM:', response.status);
+                return;
+            }
+            
+            const data = await response.json();
+            
+            // Charger les métadonnées
+            qcmMetadata = {
+                qcm_name: data.qcm_name || '',
+                auteur: data.auteur || '',
+                theme: data.theme || '',
+                visibilite: data.visibilite || false,
+                level: data.level || '',
+                sourceFile: data._source_file || null
+            };
+            
+            // Charger les questions
+            if (data.questions && Array.isArray(data.questions)) {
+                nextQuestionId = 1;
+                questions = data.questions.map(q => ({
+                    id: nextQuestionId++,
+                    text: q.text || '',
+                    answers: (q.answers || []).map(a => ({
+                        letter: a.letter || '',
+                        text: a.text || '',
+                        correct: a.correct || false
+                    }))
+                }));
+                nextQuestionId++;
+                
+                currentPreviewIndex = 0;
+                userAnswers = questions.map(() => null);
+                
+                // Afficher la section d'édition au lieu de l'import
+                document.getElementById('import-section').style.display = 'none';
+                document.getElementById('edition-section').style.display = 'block';
+                const infoBanner = document.querySelector('.info-banner');
+                if (infoBanner) {
+                    infoBanner.style.display = 'none';
+                }
+                
+                renderEdition();
+                renderPreview();
+            }
+        } catch (error) {
+            console.error('Erreur lors du chargement du QCM:', error);
+        }
+    }
+
+    // ── Parse raw text ─────────────────────────────────
+    function parseQCM(raw) {
+        const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+        const result = [];
+        let current = null;
+
+        lines.forEach(line => {
+            // Question line: starts with digit+dot/paren or "Q1"
+            const qMatch = line.match(/^(?:Q?\d+[\.\)]\s*)(.+)/i);
+            // Answer line: A) ... or A. ...  with optional * for correct
+            const aMatch = line.match(/^([A-F])[\.\)]\s*(.+)/i);
+
+            if (qMatch && !aMatch) {
+                if (current) result.push(current);
+                current = createQuestion(qMatch[1].trim(), []);
+            } else if (aMatch && current) {
+                const raw = aMatch[2];
+                const correct = raw.includes('*');
+                current.answers.push({
+                    letter: aMatch[1].toUpperCase(),
+                    text: raw.replace('*', '').trim(),
+                    correct
+                });
+            }
+        });
+        if (current) result.push(current);
+        return result;
+    }
+
+    // ── Import ─────────────────────────────────────────
+    function importQCM() {
+        const raw = document.getElementById('qcm-input').value;
+        if (!raw.trim()) return;
+
+        questions = parseQCM(raw);
+        if (!questions.length) {
+            alert('Format non reconnu. Vérifiez votre texte.');
+            return;
+        }
+
+        currentPreviewIndex = 0;
+        userAnswers = questions.map(() => null);
+        document.getElementById('import-section').style.display = 'none';
+        document.getElementById('edition-section').style.display = 'block';
+        const infoBanner = document.querySelector('.info-banner');
+        if (infoBanner) {
+            infoBanner.style.display = 'none';
+        }
+
+        renderEdition();
+        renderPreview();
+    }
+
+    // ── Render edition ─────────────────────────────────
+    function renderEdition() {
+        const list = document.getElementById('questions-list');
+        const prevRects = new Map();
+        list.querySelectorAll('.question-card').forEach(card => {
+            prevRects.set(card.dataset.id, card.getBoundingClientRect());
+        });
+
+        list.innerHTML = '';
+        questions.forEach((q, qi) => {
+            list.appendChild(buildQuestionCard(q, qi));
+        });
+
+        list.querySelectorAll('.question-card').forEach(card => {
+            const prevRect = prevRects.get(card.dataset.id);
+            if (!prevRect) return;
+            const newRect = card.getBoundingClientRect();
+            const dx = prevRect.left - newRect.left;
+            const dy = prevRect.top - newRect.top;
+            if (dx || dy) {
+                card.style.transform = `translate(${dx}px, ${dy}px)`;
+                card.style.transition = 'transform 0s';
+                requestAnimationFrame(() => {
+                    card.style.transition = 'transform 200ms ease';
+                    card.style.transform = '';
+                });
+            }
+        });
+    }
+
+    function buildQuestionCard(q, qi) {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.qi = qi;
+        card.dataset.id = q.id;
+
+        // Top row
+        const top = document.createElement('div');
+        top.className = 'question-top';
+
+        const drag = document.createElement('span');
+        drag.className = 'drag-handle';
+        drag.innerHTML = '<i class="ti ti-grip-vertical"></i>';
+        // Drag logic
+        drag.addEventListener('mousedown', e => startDrag(e, card, qi));
+
+        const badge = document.createElement('span');
+        badge.className = 'q-badge';
+        badge.textContent = `Q${qi + 1}`;
+
+        const titleInput = document.createElement('input');
+        titleInput.className = 'q-title-input';
+        titleInput.value = q.text;
+        titleInput.addEventListener('input', () => {
+            questions[qi].text = titleInput.value;
+            renderPreview();
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'q-actions';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'btn-copy';
+        copyBtn.innerHTML = '<i class="ti ti-copy"></i>';
+        copyBtn.title = 'Dupliquer';
+        copyBtn.onclick = () => {
+            const clone = JSON.parse(JSON.stringify(questions[qi]));
+            clone.id = nextQuestionId++;
+            questions.splice(qi + 1, 0, clone);
+            userAnswers.splice(qi + 1, 0, null);
+            renderEdition(); renderPreview();
+        };
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn-delete';
+        delBtn.innerHTML = '<i class="ti ti-trash"></i>';
+        delBtn.title = 'Supprimer';
+        delBtn.onclick = () => {
+            questions.splice(qi, 1);
+            userAnswers.splice(qi, 1);
+            if (currentPreviewIndex >= questions.length) {
+                currentPreviewIndex = Math.max(0, questions.length - 1);
+            }
+            renderEdition(); renderPreview();
+        };
+
+        actions.append(copyBtn, delBtn);
+        top.append(drag, badge, titleInput, actions);
+
+        // Answers grid
+        const grid = document.createElement('div');
+        grid.className = 'answers-grid';
+        q.answers.forEach((ans, ai) => {
+            grid.appendChild(buildAnswerItem(ans, qi, ai));
+        });
+
+        // Footer
+        const footer = document.createElement('div');
+        footer.className = 'question-footer';
+
+        const addAns = document.createElement('button');
+        addAns.className = 'btn-add-answer';
+        addAns.innerHTML = '<i class="ti ti-plus"></i> Ajouter une réponse';
+        addAns.onclick = () => {
+            const nextLetter = LETTERS[q.answers.length] || '?';
+            q.answers.push({ letter: nextLetter, text: '', correct: false });
+            renderEdition(); renderPreview();
+        };
+
+        const correctLabel = document.createElement('button');
+        correctLabel.className = 'btn-correct-label';
+        correctLabel.innerHTML = '<i class="ti ti-circle-check"></i> Réponse correcte';
+
+        footer.append(addAns, correctLabel);
+        card.append(top, grid, footer);
+        return card;
+    }
+
+    function buildAnswerItem(ans, qi, ai) {
+        const item = document.createElement('div');
+        item.className = 'answer-item' + (ans.correct ? ' correct' : '');
+
+        const letter = document.createElement('span');
+        letter.className = 'answer-letter';
+        letter.textContent = ans.letter;
+
+        const input = document.createElement('input');
+        input.className = 'answer-input';
+        input.value = ans.text;
+        input.addEventListener('input', () => {
+            questions[qi].answers[ai].text = input.value;
+            renderPreview();
+        });
+
+        const radio = document.createElement('div');
+        radio.className = 'answer-radio';
+        radio.style.cursor = 'pointer';
+        radio.onclick = () => {
+            // Toggle correct: only one correct per question
+            questions[qi].answers.forEach((a, i) => a.correct = (i === ai));
+            renderEdition(); renderPreview();
+        };
+
+        item.append(letter, input, radio);
+        return item;
+    }
+
+    // ── Render preview ─────────────────────────────────
+    function renderPreview() {
+        const box = document.getElementById('preview-box');
+        const nextBtn = document.getElementById('next-question-btn');
+        const prevBtn = document.getElementById('prev-question-btn');
+        if (!questions.length) {
+            box.innerHTML = `<div class="preview-empty">
+                <div class="preview-icon"><i class="ti ti-book"></i></div>
+                <h4>Aucun QCM à afficher</h4>
+                <p>Les questions de votre QCM apparaîtront ici après l'import.</p>
+            </div>`;
+            nextBtn.disabled = true;
+            prevBtn.disabled = true;
+            return;
+        }
+        if (currentPreviewIndex >= questions.length) {
+            currentPreviewIndex = questions.length - 1;
+        }
+
+        const q = questions[currentPreviewIndex];
+        const answeredIndex = userAnswers[currentPreviewIndex];
+        const hasAnswered = answeredIndex !== null && answeredIndex !== undefined;
+
+        box.innerHTML = '';
+
+        const div = document.createElement('div');
+        div.className = 'preview-question';
+
+        const num = document.createElement('div');
+        num.className = 'preview-q-num';
+        num.textContent = `${currentPreviewIndex + 1}.`;
+
+        const text = document.createElement('div');
+        text.className = 'preview-q-text';
+        text.textContent = q.text;
+
+        div.append(num, text);
+
+        q.answers.forEach((ans, ai) => {
+            const isCorrect = ans.correct;
+            const isSelected = answeredIndex === ai;
+            const row = document.createElement('div');
+            row.className = 'preview-answer';
+
+            if (hasAnswered && isCorrect) {
+                row.classList.add('correct');
+            }
+            if (hasAnswered && isSelected && !isCorrect) {
+                row.classList.add('wrong');
+            }
+
+            const pl = document.createElement('span');
+            pl.className = 'p-letter';
+            pl.textContent = ans.letter;
+
+            const pt = document.createElement('span');
+            pt.style.flex = '1';
+            pt.textContent = ans.text;
+
+            const pr = document.createElement('div');
+            pr.className = 'p-radio';
+
+                row.append(pl, pt, pr);
+            if (!hasAnswered) {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', () => {
+                    userAnswers[currentPreviewIndex] = ai;
+                    renderPreview();
+                });
+            }
+            div.appendChild(row);
+        });
+
+        box.appendChild(div);
+
+        if (hasAnswered) {
+            const feedback = document.createElement('div');
+            feedback.className = 'preview-feedback';
+            const selected = q.answers[answeredIndex];
+            const correct = q.answers.find(a => a.correct) || {};
+            if (selected && selected.correct) {
+                feedback.textContent = 'Bonne réponse !';
+                feedback.classList.add('correct-feedback');
+            } else {
+                feedback.textContent = `Mauvaise réponse. La bonne réponse est ${correct.letter}) ${correct.text}`;
+                feedback.classList.add('wrong-feedback');
+            }
+            box.appendChild(feedback);
+        }
+
+        nextBtn.disabled = currentPreviewIndex >= questions.length - 1;
+        prevBtn.disabled = currentPreviewIndex <= 0;
+    }
+
+    function nextQuestion() {
+        if (currentPreviewIndex < questions.length - 1) {
+            currentPreviewIndex += 1;
+            renderPreview();
+        }
+    }
+
+    function openSaveModal() {
+        // Pré-remplir les champs avec les métadonnées existantes si en mode édition
+        if (qcmMetadata) {
+            document.getElementById('save-qcm-name').value = qcmMetadata.qcm_name || '';
+            document.getElementById('save-author').value = qcmMetadata.auteur;
+            document.getElementById('save-theme').value = qcmMetadata.theme;
+            document.getElementById('save-visibility').value = qcmMetadata.visibilite ? 'public' : 'private';
+            document.getElementById('save-level').value = qcmMetadata.level;
+        }
+        document.getElementById('save-modal').classList.add('open');
+    }
+
+    function closeSaveModal() {
+        document.getElementById('save-modal').classList.remove('open');
+    }
+
+    function confirmSave() {
+        const qcmName = document.getElementById('save-qcm-name').value.trim();
+        const author = document.getElementById('save-author').value.trim();
+        const visibility = document.getElementById('save-visibility').value;
+        const theme = document.getElementById('save-theme').value.trim();
+        const level = document.getElementById('save-level').value;
+
+        if (!qcmName || !author || !theme) {
+            alert('Veuillez renseigner le nom du QCM, le nom de l\'auteur et le thème.');
+            return;
+        }
+
+        closeSaveModal();
+        saveQCM({ qcmName, author, visibility, theme, level });
+    }
+
+    async function saveQCM(metadata = {}) {
+        const btn = document.getElementById('save-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="ti ti-loader-2" style="font-size:18px;"></i> Sauvegarde...';
+
+        try {
+            const payload = {
+                qcm_name: metadata.qcmName,
+                auteur: metadata.author,
+                theme: metadata.theme,
+                visibilite: metadata.visibility === 'public',
+                level: metadata.level,
+                questions,
+            };
+
+            // Ajouter le chemin du fichier source si on édite un QCM existant
+            if (qcmMetadata && qcmMetadata.sourceFile) {
+                payload.source_file = qcmMetadata.sourceFile;
+            }
+
+            const response = await fetch('/api/qcm/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const error = await response.json().catch(() => null);
+                throw new Error(error?.detail || 'Erreur lors de la sauvegarde.');
+            }
+
+            showToast();
+        } catch(e) {
+            alert(e.message || 'Erreur lors de la sauvegarde.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="ti ti-device-floppy" style="font-size:18px;"></i> Sauvegarder le QCM';
+        }
+    }
+
+    function showToast() {
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ── Drag & drop (réordonner questions) ─────────────
+    let dragState = null;
+
+    function startDrag(e, card, qi) {
+        e.preventDefault();
+        const list = document.getElementById('questions-list');
+        const cards = [...list.querySelectorAll('.question-card')];
+        const rect = card.getBoundingClientRect();
+        const offsetY = e.clientY - rect.top;
+
+        card.style.opacity = '0.5';
+
+        dragState = { qi, card, offsetY };
+
+        const onMove = ev => {
+            const target = cards.find(c => {
+                if (c === card) return false;
+                const r = c.getBoundingClientRect();
+                return ev.clientY > r.top && ev.clientY < r.bottom;
+            });
+            if (target) {
+                const ti = parseInt(target.dataset.qi);
+                const fromIdx = questions.findIndex((_, i) => i === dragState.qi);
+                const [moved] = questions.splice(fromIdx, 1);
+                questions.splice(ti, 0, moved);
+                dragState.qi = ti;
+                renderEdition();
+                renderPreview();
+                // Re-bind after re-render
+                cleanup();
+            }
+        };
+
+        const onUp = () => { cleanup(); card.style.opacity = ''; dragState = null; };
+        const cleanup = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+        };
+
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    }
+
+    function addQuestion() {
+        questions.push(createQuestion('Nouvelle question', [
+            { letter: 'A', text: '', correct: true },
+            { letter: 'B', text: '', correct: false },
+            { letter: 'C', text: '', correct: false },
+            { letter: 'D', text: '', correct: false },
+        ]));
+        userAnswers.push(null);
+        renderEdition();
+        renderPreview();
+    }
+
+    function prevQuestion() {
+        if (currentPreviewIndex > 0) {
+            currentPreviewIndex -= 1;
+            renderPreview();
+        }
+    }
+
+    // ── Initialisation au démarrage ────────────────────
+    document.addEventListener('DOMContentLoaded', function() {
+        loadQCMFromFile();
+    });
+</script>
+
+</body>
+</html>
