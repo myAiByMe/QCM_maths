@@ -1,0 +1,87 @@
+{
+  "qcm_name": "who's gay",
+  "auteur": "gay man",
+  "theme": "test",
+  "visibilite": true,
+  "level": "2nde",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Quel est le résultat de 3 + 4 × 2 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "9",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "14",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "11",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "7",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Quel est le résultat de (5 + 3) × 4 – 6 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "26",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "14",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "32",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "18",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "qui est gay",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "toi",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "a",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "a",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "b",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

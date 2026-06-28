@@ -1,6 +1,8 @@
 from datetime import datetime
 import json
+import random
 import re
+import string
 from pathlib import Path
 
 import uvicorn
@@ -117,6 +119,19 @@ def get_dashboard_prof():
 @app.get("/prof_dashboard.html", response_class=HTMLResponse)
 def get_prof_dashboard_html():
     return get_dashboard_prof()
+
+def generate_class_code(length: int = 4) -> str:
+    """Génère un code de connexion aléatoire de 4 caractères lettres/chiffres."""
+    alphabet = string.ascii_uppercase + string.digits
+    return ''.join(random.choice(alphabet) for _ in range(length))
+
+@app.get("/lunch.html", response_class=HTMLResponse)
+def get_lunch_html():
+    path = TEMPLATES_DIR / "lunch.html"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="lunch.html introuvable")
+    html = path.read_text(encoding="utf-8")
+    return html.replace("{{CLASS_CODE}}", generate_class_code())
 
 @app.get("/home_prof.html", response_class=HTMLResponse)
 def get_home_prof_html():

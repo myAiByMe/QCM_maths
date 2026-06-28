@@ -1,0 +1,1569 @@
+{
+  "qcm_name": "equation differentiel",
+  "auteur": "mr.test",
+  "theme": "equation",
+  "visibilite": true,
+  "level": "2nde",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Quel est le résultat de 3 + 4 × 2 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "9",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "14",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "11",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "7",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Quel est le résultat de (5 + 3) × 4 – 6 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "26",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "14",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "32",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "18",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Parmi les expressions suivantes, laquelle est un produit ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "5 × (3 + 2)",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "5 + 3 × 2",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "(5 + 3) + 2",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "5 + (3 + 2)",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Quel est le résultat de 7 × (12 – 4) – 3 × 5 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "41",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "71",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "56",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "23",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Quel est l'opposé de −7 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "12",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "0",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "−7",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "7",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Quel est le résultat de −3 + 8 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "−11",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "5",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "11",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "−5",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Quel est le résultat de 4 − (−6) ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "−2",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "2",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "−10",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "10",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Quel est le résultat de −5 + 3 − (−2) + (−4) ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "−4",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "0",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "4",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "−8",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Laquelle de ces fractions est égale à 2/3 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3/4",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "8/12",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "5/6",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "4/9",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Quel est le résultat de 3/5 + 2/5 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "5/25",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "6/10",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "1",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "5/10",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Quel est le résultat de 1/4 + 1/3 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "2/7",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "2/12",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "7/12",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "3/7",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Laquelle de ces fractions est sous la forme la plus simplifiée ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "6/9",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "4/10",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "5/7",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "8/12",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Quel est le résultat de 3² ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "6",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "9",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "8",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "12",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Quel est le résultat de 2³ ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "6",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "5",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "8",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "16",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "Quel est le résultat de 4² + 3² ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "49",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "14",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "25",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "20",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "Quel est le résultat de 10³ ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "300",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "10 000",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "30",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "1 000",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Quelle est la valeur de 3x + 5 pour x = 2 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "16",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "10",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "13",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "11",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Laquelle de ces expressions est une somme ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3 × (x + 2)",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "5x",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "3x + 2",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "4 × (x − 1)",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Quel est le résultat du développement de 4 × (x + 3) ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "4x + 3",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "x + 12",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "4x + 12",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "4x − 3",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "Quelle équation correspond à : le double d'un nombre augmenté de 3 est égal à 11 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "x + 3 = 11",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "2 + 3x = 11",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "x + 6 = 11",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "2x + 3 = 11",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "text": "Un point a pour abscisse −2 sur une droite graduée. Où se situe-t-il par rapport à 0 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "À 2 unités à droite de 0",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "À 2 unités à gauche de 0",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "À l'origine",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "À 0,2 unité de 0",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "text": "Dans un repère orthogonal, le point A a pour coordonnées (3 ; −2). Quelle est son ordonnée ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "0",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "2",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "−2",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "text": "Dans un repère orthogonal, quel point est situé le plus haut ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "B(1 ; −3)",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "A(2 ; 4)",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "D(−1 ; 4)",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "C(0 ; −1)",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "text": "Quel point appartient à l'axe des ordonnées ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "P(3 ; 0)",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "R(2 ; −2)",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Q(0 ; −5)",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "S(−3 ; 1)",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "text": "Quel solide a pour patron un rectangle qui se referme en tube avec deux disques ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Un cube",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Un prisme droit triangulaire",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Un cylindre de révolution",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "Un cône",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "text": "Quel est le volume d'un cube de côté 3 cm ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "9 cm³",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "18 cm³",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "6 cm³",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "27 cm³",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "text": "Un pavé droit mesure 4 cm de longueur, 3 cm de largeur et 2 cm de hauteur. Quel est son volume ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "14 cm³",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "18 cm³",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "24 cm³",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "9 cm³",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "text": "Quelle formule permet de calculer le volume d'un cylindre de révolution de rayon r et de hauteur h ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "V = 2πr × h",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "V = πr × h",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "V = πr² + h",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "V = πr² × h",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "text": "Quel autre nom désigne la symétrie centrale ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Symétrie axiale",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Demi-tour",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "Rotation d'un quart de tour",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Translation",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "text": "Si le point A a pour coordonnées (2 ; 3) et que O est le centre du demi-tour, quelle est l'image de A ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "(2 ; −3)",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "(−2 ; −3)",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "(−2 ; 3)",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "(3 ; 2)",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "text": "Par un demi-tour de centre O, l'image du segment [AB] est [A'B']. Quelle propriété est vérifiée ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "[AB] et [A'B'] sont perpendiculaires",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "[AB] et [A'B'] ont des longueurs différentes",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "O est le milieu de [AA'] et de [BB']",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "A' est le symétrique de B par rapport à O",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "text": "Deux figures sont symétriques par rapport à un point O. Que peut-on dire de leurs aires ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "L'aire de l'image est deux fois plus grande",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Elles n'ont aucun lien",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "L'aire de l'image est deux fois plus petite",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Leurs aires sont égales",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "text": "Comment appelle-t-on les angles situés de part et d'autre de la sécante, entre deux droites parallèles ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Angles supplémentaires",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Angles correspondants",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Angles adjacents",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Angles alternes-internes",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "text": "Si deux droites parallèles sont coupées par une sécante, les angles alternes-internes sont :",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Complémentaires",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Supplémentaires",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Adjacents",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Égaux",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "text": "Un angle alterne-interne mesure 47°. Quelle est la mesure de l'angle alterne-interne correspondant ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "137°",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "43°",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "90°",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "47°",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "text": "Deux angles correspondants mesurent 65° et 65°. Que peut-on conclure ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Les deux droites sont perpendiculaires",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Les deux droites sont sécantes mais non parallèles",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "On ne peut rien conclure",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Les deux droites sont parallèles",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "text": "La somme des angles d'un triangle est égale à :",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "90°",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "360°",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "270°",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "180°",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "text": "Un triangle a deux angles mesurant 55° et 70°. Quelle est la mesure du troisième angle ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "55°",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "125°",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "45°",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "55°",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "text": "Un triangle a trois angles égaux. Quelle est la nature de ce triangle ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Rectangle",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Quelconque",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Équilatéral",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "Isocèle",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "text": "Un triangle a des angles mesurant 90°, 50° et 40°. Quelle est sa nature ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Isocèle",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Quelconque",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Équilatéral",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Rectangle",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "text": "Quelle est la définition d'un parallélogramme ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Un quadrilatère ayant quatre côtés égaux",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Un quadrilatère ayant deux angles droits",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Un quadrilatère ayant deux diagonales perpendiculaires",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Un quadrilatère ayant ses côtés opposés parallèles deux à deux",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "text": "Un quadrilatère ABCD est un parallélogramme, AB = 5 cm et BC = 3 cm. Quelle est la longueur de CD ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3 cm",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "4 cm",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "5 cm",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "8 cm",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "text": "Dans un parallélogramme, les diagonales :",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Sont perpendiculaires",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Ont la même longueur",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Se coupent en leurs milieux",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "Sont parallèles",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "text": "Quelle propriété est vraie pour un rectangle mais pas pour tous les parallélogrammes ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Ses côtés opposés sont parallèles",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Ses diagonales se coupent en leurs milieux",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Ses angles sont tous droits",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "Ses côtés opposés sont égaux",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "text": "On recueille les notes : 8 ; 12 ; 10 ; 14 ; 6. Quelle est la moyenne ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "9",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "11",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "12",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "10",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "text": "12 élèves sur 30 ont choisi le bleu. Quelle est la fréquence correspondante ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "50 %",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "40 %",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "12 %",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "30 %",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "text": "L'effectif total est 25. Un groupe a un effectif de 10. Quelle est sa fréquence ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "25 %",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "50 %",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "40 %",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "10 %",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "text": "Quelle représentation est la plus adaptée pour comparer des parts d'un tout ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Graphique cartésien",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Tableau de valeurs",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Diagramme en barres",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Diagramme circulaire",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "text": "On lance un dé à six faces. Quel est le vocabulaire correct pour désigner chaque résultat possible ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Un événement",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Une probabilité",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Un effectif",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Une issue",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "text": "On tire au sort une carte parmi 5 numérotées de 1 à 5. Quelle est la probabilité d'obtenir la carte numéro 3 ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3/5",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "1/3",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "3",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "1/5",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "text": "Un sac contient 3 billes rouges et 7 billes bleues. Obtenir une bille rouge est :",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Certain",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Impossible",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Très probable",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Improbable",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "text": "Un sac contient 4 billes vertes et 4 billes jaunes. Obtenir une bille verte est :",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Impossible",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Certain",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Très probable",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Une chance sur deux",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "text": "Un stylo coûte 2 €. Quel est le prix de 5 stylos ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "7 €",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "10 €",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "12 €",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "8 €",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "text": "Un robinet remplit 3 litres en 4 minutes. Combien de litres remplit-il en 12 minutes ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "6 litres",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "9 litres",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "15 litres",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "36 litres",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "text": "Dans une classe de 25 élèves, 40 % sont des filles. Combien y a-t-il de filles ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "15",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "20",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "8",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "10",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "text": "Une carte a une échelle de 1/50 000. Sur la carte, deux villes sont distantes de 4 cm. Quelle est la distance réelle ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "200 m",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "20 km",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "2 km",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "2 000 km",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "text": "Un robinet verse 3 litres par minute. Quelle formule exprime le volume V en fonction du temps t ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "V = t + 3",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "V = t ÷ 3",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "V = 3 + t²",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "V = 3 × t",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "text": "On donne P = 4 × c. Pour c = 7, quelle est la valeur de P ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "11",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "28",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "21",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "47",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "text": "Pour x = 2 ; y = 6 et pour x = 4 ; y = 12. Cette situation est-elle proportionnelle ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Non, car les valeurs ne sont pas entières",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Oui, car les valeurs augmentent",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Non, car le tableau n'a que deux colonnes",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "Oui, car le rapport y/x est constant et égal à 3",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "text": "Dans un repère, où se situe obligatoirement la droite d'une situation de proportionnalité ?",
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Elle passe toujours par le point (1 ; 1)",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Elle est toujours horizontale",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "Elle passe toujours par l'origine du repère",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "Elle est toujours verticale",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

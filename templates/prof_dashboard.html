@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Monod Quiz - Dashboard Professeur</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      min-height: 100vh;
+      background: #F0F1FE;
+      position: relative;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .blob-1 {
+      position: fixed; bottom: -80px; left: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, #d7d3f540 0%, transparent 70%);
+      z-index: 0; pointer-events: none;
+    }
+    .blob-2 {
+      position: fixed; top: -60px; right: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, #b3a8ff25 0%, transparent 70%);
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: relative; z-index: 2;
+      display: flex; align-items: center;
+      gap: clamp(8px, 1.2vw, 18px);
+      padding: 3vh clamp(20px, 4vw, 60px) 0;
+    }
+    .logo-wrap {
+      width: clamp(42px, 9vh, 72px); height: clamp(42px, 9vh, 72px);
+      border-radius: 50%; overflow: hidden; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-wrap img { width: 95%; height: 95%; object-fit: cover; display: block; }
+    .title-block h1 {
+      font-size: clamp(22px, 3.5vw, 42px); font-weight: 800;
+      color: #3b3bbf; line-height: 1.05; letter-spacing: -0.5px;
+    }
+    .title-block p {
+      font-size: clamp(12px, 1.3vw, 17px); color: #9396b0;
+      margin-top: 2px; font-weight: 400;
+    }
+
+    /* ── Action Cards ── */
+    .actions-row {
+      position: relative; z-index: 2;
+      display: flex; gap: clamp(14px, 2vw, 24px);
+      padding: 4vh clamp(20px, 4vw, 60px) 0;
+    }
+    .action-card {
+      flex: 1; min-width: 0;
+      min-height: clamp(100px, 14vh, 140px);
+      background-color: #FEFDFD;
+      border-radius: clamp(14px, 2vw, 20px);
+      box-shadow: 10px 10px 60px #D7D3F5;
+      display: flex; align-items: center;
+      padding: 0 clamp(16px, 3vw, 40px);
+      position: relative; overflow: hidden;
+    }
+    .text-group {
+      flex: 1; min-width: 0;
+      padding-right: clamp(90px, 16vw, 200px);
+    }
+    .text-group h2 {
+      color: #3b3bbf; margin-bottom: 4px;
+      font-size: clamp(14px, 1.5vw, 22px);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .text-group p { color: #9396b0; font-size: clamp(11px, 1vw, 16px); line-height: 1.4; }
+    .action-card .btn-action {
+      position: absolute; top: 50%; right: clamp(12px, 3vw, 40px);
+      transform: translateY(-50%);
+      height: clamp(36px, 4.5vh, 50px); width: clamp(100px, 14vw, 180px);
+      color: white; border: none; border-radius: clamp(8px, 1vw, 12px);
+      font-size: clamp(11px, 1vw, 15px); cursor: pointer; transition: 0.4s;
+      font-family: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 8px;
+    }
+    .btn-create { background-color: #5D3DF4; box-shadow: 8px 8px 30px #B3A8FF; }
+    .btn-create:hover { transform: translateY(-50%) scale(1.05); }
+    .btn-launch { background-color: #12B894; box-shadow: 1px 1px 20px #12b894ab; }
+    .btn-launch:hover { transform: translateY(-50%) scale(1.05); }
+    .action-card a { text-decoration: none; display: contents; }
+
+    /* ── Mobile actions ── */
+    .mobile-actions {
+      display: none; position: relative; z-index: 2;
+      padding: 3vh 6vw 0; flex-direction: column; gap: 12px;
+    }
+    .mobile-action-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; width: 100%; height: 54px; border: none;
+      border-radius: 14px; color: white; font-size: 15px; font-weight: 600;
+      cursor: pointer; text-decoration: none; font-family: inherit; transition: 0.3s;
+    }
+    .mobile-action-btn:hover { transform: scale(1.02); }
+    .mobile-action-btn.purple { background-color: #5D3DF4; box-shadow: 0 6px 24px #B3A8FF; }
+    .mobile-action-btn.green { background-color: #12B894; box-shadow: 0 6px 24px #12b894aa; }
+
+    /* ── Toolbar ── */
+    .toolbar-section {
+      position: relative; z-index: 2;
+      padding: 4vh clamp(20px, 4vw, 60px) 0;
+    }
+    .toolbar-top {
+      display: flex; align-items: center;
+      gap: clamp(10px, 1.2vw, 16px); flex-wrap: wrap;
+    }
+    .toolbar-top h2 {
+      color: #3b3bbf; font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 700; margin-right: auto;
+    }
+    .search {
+      height: clamp(36px, 4.2vh, 40px); width: clamp(140px, 18vw, 260px);
+      border: 1px solid #dadbe9; border-radius: 5px; padding: 0 12px;
+      font-size: clamp(12px, 1vw, 14px); color: #555; outline: none;
+      font-family: inherit; background: white;
+    }
+    .search::placeholder { color: #b0b3c7; }
+    .search:focus { border-color: #5D3DF4; box-shadow: 0 0 0 3px #5D3DF420; }
+    #avaible-theme {
+      height: clamp(36px, 4.2vh, 40px); width: clamp(120px, 14vw, 200px);
+      border: 1px solid #dadbe9; border-radius: 5px; padding: 0 28px 0 10px;
+      background-color: white; font-size: clamp(12px, 1vw, 14px); cursor: pointer;
+      font-family: inherit; color: #555; outline: none;
+      appearance: none; -webkit-appearance: none; -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="14" width="14" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 20,0 10,12"/></svg>');
+      background-repeat: no-repeat; background-position: right 8px center;
+    }
+    #avaible-theme:focus { border-color: #5D3DF4; box-shadow: 0 0 0 3px #5D3DF420; }
+    
+    #avaible-class {
+      height: clamp(36px, 4.2vh, 40px); width: clamp(120px, 14vw, 200px);
+      border: 1px solid #dadbe9; border-radius: 5px; padding: 0 28px 0 10px;
+      background-color: white; font-size: clamp(12px, 1vw, 14px); cursor: pointer;
+      font-family: inherit; color: #555; outline: none;
+      appearance: none; -webkit-appearance: none; -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="14" width="14" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 20,0 10,12"/></svg>');
+      background-repeat: no-repeat; background-position: right 8px center;
+    }
+    #avaible-class:focus { border-color: #5D3DF4; box-shadow: 0 0 0 3px #5D3DF420; }
+
+    /* ── Tabs ── */
+    .tabs-row {
+      display: flex; gap: 0;
+      margin-top: clamp(14px, 2vh, 20px);
+      border-bottom: 2px solid #E0DFF5;
+    }
+    .tab-btn {
+      padding: 8px 0; margin-right: clamp(18px, 2vw, 28px);
+      font-size: clamp(12px, 1vw, 14px);
+      background: none; border: none; color: #9396b0; cursor: pointer;
+      font-family: inherit; transition: color 0.3s;
+      position: relative; bottom: -2px; border-bottom: 2px solid transparent;
+    }
+    .tab-btn.active { color: #3b3bbf; font-weight: 600; border-bottom-color: #5D3DF4; }
+    .tab-btn:hover:not(.active) { color: #5D3DF4; }
+
+    /* ── Empty State ── */
+    .empty-state {
+      display: flex; flex-direction: column; align-items: center;
+      gap: clamp(12px, 2vh, 18px);
+      padding: clamp(36px, 6vh, 60px) 20px 80px; user-select: none;
+    }
+    .empty-icon-wrap {
+      width: clamp(80px, 12vw, 120px); height: clamp(80px, 12vw, 120px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E8E6FF 0%, #D7D3F5 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 30px #D7D3F580;
+    }
+    .empty-icon-wrap i { font-size: clamp(30px, 4vw, 48px); color: #9089D4; }
+    .empty-state h3 { color: #3b3bbf; font-size: clamp(17px, 2vw, 22px); font-weight: 700; }
+    .empty-state p {
+      color: #9396b0; font-size: clamp(13px, 1.2vw, 15px);
+      text-align: center; max-width: 340px; line-height: 1.6;
+    }
+    .btn-empty {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 4px;
+      padding: clamp(10px, 1.3vh, 12px) clamp(20px, 2.5vw, 28px);
+      background-color: #5D3DF4; color: white; text-decoration: none;
+      border-radius: clamp(8px, 1vw, 12px); font-size: clamp(13px, 1.2vw, 15px);
+      font-weight: 600; box-shadow: 8px 8px 30px #B3A8FF; transition: 0.4s;
+      border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-empty:hover { transform: scale(1.05); box-shadow: 10px 10px 40px #B3A8FF; }
+
+    /* ── QCM Cards ── */
+    .qcm-list {
+      padding-top: clamp(14px, 2vh, 20px);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: clamp(12px, 1.5vh, 16px);
+    }
+
+    .qcm-card {
+      width: clamp(220px, 30%, 340px);
+      background: #FEFDFD;
+      padding: clamp(18px, 2.5vh, 24px) clamp(18px, 3vw, 28px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      border-radius: clamp(14px, 2vw, 20px);
+      box-shadow: 6px 6px 30px rgba(183, 170, 255, 0.18);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .qcm-card:hover {
+      background: #F8F7FF;
+      transform: translateY(-2px);
+      box-shadow: 8px 8px 40px rgba(183, 170, 255, 0.28);
+    }
+
+    .qcm-card-info { min-width: 0; flex: 1; }
+
+    .qcm-card-title {
+      font-size: clamp(15px, 1.4vw, 18px);
+      font-weight: 700;
+      color: #2a2a5e;
+      margin-bottom: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .qcm-card-author {
+      font-size: clamp(12px, 1vw, 14px);
+      color: #9396b0;
+      margin-bottom: 8px;
+    }
+
+    .qcm-card-meta {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+
+    .qcm-card-badge {
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .qcm-card-badge.public { background: #E6F4EA; color: #1A7F37; }
+    .qcm-card-badge.prive  { background: #FEF3E0; color: #B36A00; }
+
+    .qcm-card-count { font-size: clamp(11px, 0.9vw, 13px); color: #b0b3c7; }
+    .qcm-card-count i { margin-right: 3px; }
+
+    .qcm-card-actions {
+      display: flex; align-items: flex-start;
+      flex-direction: column;
+      gap: 10px; flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .qcm-card-view {
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 600;
+      color: #5D3DF4;
+      text-decoration: none;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .qcm-card-view i { font-size: 0.8em; transition: transform 0.2s; }
+    .qcm-card-view:hover { color: #4330b8; }
+    .qcm-card-view:hover i { transform: translateX(3px); }
+
+    .qcm-card-edit {
+      font-size: clamp(12px, 1vw, 14px);
+      font-weight: 500; color: #9396b0;
+      text-decoration: none; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 14px;
+      border: 1px solid #E0DFF5; border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .qcm-card-edit:hover {
+      color: #5D3DF4; border-color: #5D3DF4; background: #F0EDFF;
+    }
+
+    @media (max-width: 640px) {
+      .actions-row { display: none; }
+      .mobile-actions { display: flex; }
+      .header { padding: 2.5vh 6vw 0; }
+      .toolbar-section { padding: 3vh 6vw 0; }
+      .toolbar-top { flex-direction: column; align-items: stretch; gap: 10px; }
+      .toolbar-top h2 { margin-right: 0; }
+      .search, #avaible-theme, #avaible-class { width: 100%; height: 44px; }
+      .qcm-card {
+        flex-direction: column; align-items: flex-start; padding: 16px;
+      }
+      .qcm-card-actions {
+        width: 100%; justify-content: space-between;
+        padding-top: 12px; border-top: 1px solid #EDEDF5;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="/static/logo.png" alt="Logo Collège Théodore Monod">
+    </div>
+    <div class="title-block">
+      <h1>Monod Quiz</h1>
+      <p>Dashboard Professeur</p>
+    </div>
+  </div>
+
+  <!-- Desktop : cartes -->
+  <div class="actions-row">
+    <div class="action-card">
+      <div class="text-group">
+        <h2>Créer un nouveau QCM</h2>
+        <p>Concevez votre propre questionnaire en quelques clics !</p>
+      </div>
+      <a href="create_QCM.html">
+        <button class="btn-action btn-create">Créer un QCM ⟶</button>
+      </a>
+    </div>
+    <div class="action-card">
+      <div class="text-group">
+        <h2>Lancer une classe</h2>
+        <p>Démarrer une session et inviter vos élèves à rejoindre</p>
+      </div>
+      <a href="lunch.html">
+        <button class="btn-action btn-launch">Lancer une classe ⟶</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile : boutons compacts -->
+  <div class="mobile-actions">
+    <a href="create_QCM.html" class="mobile-action-btn purple">
+      <i class="fa-solid fa-plus"></i>
+      Créer un nouveau QCM
+    </a>
+    <a href="lunch.html" class="mobile-action-btn green">
+      <i class="fa-solid fa-rocket"></i>
+      Lancer une classe
+    </a>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar-section">
+    <div class="toolbar-top">
+      <h2>Tous les QCM disponibles</h2>
+      <input type="text" placeholder="⌕ Rechercher un QCM" class="search" id="searchInput">
+      <select id="avaible-theme">
+        <option value="all">Tous les thèmes</option>
+      </select>
+      <select id="avaible-class">
+        <option value="all">Toutes les classes</option>
+        <option value="6éme">6éme</option>
+        <option value="5ème">5ème</option>
+        <option value="4ème">4ème</option>
+        <option value="3ème">3ème</option>
+        <option value="2nde">2nde</option>
+      </select>
+    </div>
+
+    <div class="tabs-row">
+      <button class="tab-btn active" data-tab="public">
+        <i class="fa-solid fa-globe" style="margin-right:5px;font-size:12px;"></i>QCM publics
+      </button>
+      <button class="tab-btn" data-tab="private">
+        <i class="fa-solid fa-lock" style="margin-right:5px;font-size:12px;"></i>QCM privés
+      </button>
+    </div>
+
+    <div id="qcmContainer">
+      <div class="empty-state">
+        <div class="empty-icon-wrap">
+          <i class="fa-regular fa-folder-open"></i>
+        </div>
+        <h3>Aucun QCM n'a été créé</h3>
+        <p>Commencez par créer votre premier questionnaire pour le voir apparaître ici.</p>
+        <a href="create_QCM.html" class="btn-empty">
+          <i class="fa-solid fa-plus"></i>
+          Créer mon premier QCM
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allQcms = [];
+    let currentTab = 'public';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadQcms();
+      bindEvents();
+    });
+
+    function bindEvents() {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentTab = btn.dataset.tab;
+          renderQcms();
+        });
+      });
+      document.getElementById('searchInput').addEventListener('input', renderQcms);
+      document.getElementById('avaible-theme').addEventListener('change', renderQcms);
+      document.getElementById('avaible-class').addEventListener('change', renderQcms);
+    }
+
+    async function loadQcms() {
+      try {
+        const res = await fetch('/api/qcm/list');
+        if (!res.ok) throw new Error('Erreur serveur');
+        allQcms = await res.json();
+        allQcms.sort((a, b) => b.filename.localeCompare(a.filename));
+        populateThemes();
+        renderQcms();
+      } catch (err) {
+        console.error(err);
+        document.getElementById('qcmContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon-wrap"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Erreur de chargement</h3>
+            <p>Impossible de récupérer les QCM depuis le serveur.</p>
+          </div>`;
+      }
+    }
+
+    function populateThemes() {
+      const select = document.getElementById('avaible-theme');
+      const themes = [...new Set(allQcms.map(q => q.theme))].sort();
+      themes.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderQcms() {
+      const container = document.getElementById('qcmContainer');
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      const themeFilter = document.getElementById('avaible-theme').value;
+      const classFilter = document.getElementById('avaible-class').value;
+
+      let filtered = allQcms.filter(q =>
+        currentTab === 'public' ? q.visibilite === true : q.visibilite === false
+      );
+      if (themeFilter !== 'all') filtered = filtered.filter(q => q.theme === themeFilter);
+      if (classFilter !== 'all') filtered = filtered.filter(q => q.level === classFilter);
+      if (search) {
+        filtered = filtered.filter(q =>
+          q.theme.toLowerCase().includes(search) ||
+          q.auteur.toLowerCase().includes(search) ||
+          q.filename.toLowerCase().includes(search) ||
+          (q.qcm_name && q.qcm_name.toLowerCase().includes(search))
+        );
+      }
+
+      if (filtered.length === 0) {
+        const isSearch = search || themeFilter !== 'all';
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon-wrap"><i class="fa-regular fa-folder-open"></i></div>
+            <h3>${isSearch ? 'Aucun résultat' : "Aucun QCM n'a été créé"}</h3>
+            <p>${isSearch ? 'Essayez de modifier vos filtres.' : 'Commencez par créer votre premier questionnaire pour le voir apparaître ici.'}</p>
+            ${!isSearch ? '<a href="create_QCM.html" class="btn-empty"><i class="fa-solid fa-plus"></i> Créer mon premier QCM</a>' : ''}
+          </div>`;
+        return;
+      }
+
+      let html = '<div class="qcm-list">';
+      filtered.forEach(qcm => {
+        const badgeClass = qcm.visibilite ? 'public' : 'prive';
+        const badgeText  = qcm.visibilite ? 'Public' : 'Privé';
+        const editUrl    = '/qcm?file=' + encodeURIComponent(qcm.full_path);
+
+        html += `
+          <div class="qcm-card" onclick="window.location.href='lunch.html'">
+            <div class="qcm-card-info">
+              <div class="qcm-card-title">${esc(qcm.qcm_name || qcm.theme)}</div>
+              <div class="qcm-card-author">Par ${esc(qcm.auteur)} • ${esc(qcm.theme)}</div>
+              <div class="qcm-card-meta">
+                <span class="qcm-card-badge ${badgeClass}">${badgeText}</span>
+                <span class="qcm-card-count">
+                  <i class="fa-solid fa-list-check"></i>
+                  ${qcm.nb_questions} question${qcm.nb_questions !== 1 ? 's' : ''}
+                </span>
+              </div>
+            </div>
+            <div class="qcm-card-actions">
+              <a href="lunch.html" class="qcm-card-view">
+                Lancer le QCM <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a href="${editUrl}" class="qcm-card-edit" onclick="event.stopPropagation()">
+                <i class="fa-solid fa-pen"></i> Éditer
+              </a>
+            </div>
+          </div>`;
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str || '';
+      return d.innerHTML;
+    }
+  </script>
+
+</body>
+</html>
